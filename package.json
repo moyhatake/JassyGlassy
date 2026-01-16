@@ -1,0 +1,104 @@
+{
+    "name": "jassyglassy",
+    "displayName": "JassyGlassy",
+    "description": "Make your VS Code window transparent on Linux (X11 / Xorg).",
+    "version": "0.1.0",
+    "publisher": "moysatoru",
+    "icon": "images/icon.png",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/moysatoru/JassyGlassy.git"
+    },
+    "license": "MIT",
+    "engines": {
+        "vscode": "^1.75.0"
+    },
+    "categories": [
+        "Themes"
+    ],
+    "activationEvents": [
+        "onStartupFinished"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "jassyglassy.increase",
+                "title": "JassyGlassy: Increase Opacity"
+            },
+            {
+                "command": "jassyglassy.decrease",
+                "title": "JassyGlassy: Decrease Opacity"
+            },
+            {
+                "command": "jassyglassy.toggle",
+                "title": "JassyGlassy: Toggle Transparency"
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "jassyglassy.increase",
+                "key": "ctrl+alt+2",
+                "mac": "cmd+alt+2"
+            },
+            {
+                "command": "jassyglassy.decrease",
+                "key": "ctrl+alt+1",
+                "mac": "cmd+alt+1"
+            },
+            {
+                "command": "jassyglassy.toggle",
+                "key": "ctrl+alt+0",
+                "mac": "cmd+alt+0"
+            }
+        ],
+        "configuration": {
+            "title": "JassyGlassy",
+            "properties": {
+                "jassyglassy.step": {
+                    "type": "number",
+                    "default": 5,
+                    "description": "Percentage to increase/decrease opacity by."
+                },
+                "jassyglassy.minimum": {
+                    "type": "number",
+                    "default": 25,
+                    "description": "Minimum opacity percentage."
+                },
+                "jassyglassy.targetOpacity": {
+                    "type": "number",
+                    "default": 85,
+                    "description": "Target opacity for toggle (percentage)."
+                },
+                "jassyglassy.debug": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Enable debug logging"
+                }
+            }
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "pretest": "npm run compile && npm run lint",
+        "lint": "eslint src --ext ts",
+        "test": "node ./out/test/runTest.js"
+    },
+    "devDependencies": {
+        "@types/glob": "^8.1.0",
+        "@types/json-schema": "^7.0.15",
+        "@types/mocha": "^10.0.1",
+        "@types/node": "20.x",
+        "@types/vscode": "^1.75.0",
+        "@typescript-eslint/eslint-plugin": "^5.59.1",
+        "@typescript-eslint/parser": "^5.59.1",
+        "@vscode/test-electron": "^2.3.0",
+        "eslint": "^8.39.0",
+        "glob": "^8.1.0",
+        "mocha": "^10.2.0",
+        "typescript": "^5.0.4",
+        "@vscode/vsce": "^3.2.1"
+    }
+}

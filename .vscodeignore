@@ -1,0 +1,19 @@
+# Development files
+.vscode/
+node_modules/
+src/
+
+# TypeScript sources & maps
+*.ts
+*.map
+
+# Config & tooling
+tsconfig.json
+package-lock.json
+.vscodeignore
+
+# Logs
+*.log
+
+# Packaged extensions
+*.vsix
