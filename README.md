@@ -27,7 +27,7 @@ Opacity level examples:
 **OS**: Linux (X11 / Xorg) only.
 
 *   This extension utilizes the `xprop` utility to modify window properties.
-*   **Wayland Users**: This extension may not work on native Wayland sessions unless XWayland is handling the window properties correctly.
+*   **Wayland** users: This extension may not work on native Wayland sessions unless **XWayland** is handling the window properties correctly.
 *   **Windows/macOS**: Not currently supported.
 
 ### Installation of Dependencies (if missing)
@@ -51,10 +51,11 @@ You can adjust these settings in your `settings.json` or via **File > Preference
 *   `jassyglassy.step`: Percentage to change opacity by (Default: `5`).
 *   `jassyglassy.minimum`: Minimum allowed opacity to prevent invisible windows (Default: `25`).
 *   `jassyglassy.targetOpacity`: Default opacity level when toggling on (Default: `85`).
+*   `jassyglassy.debug`: Enable debug logging (Default: `false`).
 
 ## Troubleshooting
 
-**"Extension host did not start" / Window not changing:**
+**Transparency not working:**
 1.  Ensure you are running on X11 (`echo $XDG_SESSION_TYPE` should output `x11`).
 2.  Ensure your desktop environment (XFCE, KDE, Gnome) has a **Compositor** enabled. Transparency requires a compositor.  
     *   *e.g.*, **XFCE**: Settings **>** Window Manager Tweaks **>** Compositor **>** Enable display compositing.
