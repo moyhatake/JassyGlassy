@@ -7,7 +7,7 @@
 - **Dynamic Opacity**: Easily increase or decrease window transparency.
 - **Smart Toggle**: Toggle between full opacity and your preferred transparency level with a single shortcut.
 - **Memory**: JassyGlassy remembers your last used opacity level settings, even after you close the window.
-- **Configurable**: Customize the step size (default 5%) and minimum opacity (default 25%) to suit your needs.
+- **Configurable**: Customize the step size (default 5%), minimum opacity (default 25%) and whether to enable debug logging (default false).  
 
 ## Preview
 Opacity level examples:
