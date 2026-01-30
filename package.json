@@ -2,7 +2,7 @@
     "name": "jassyglassy",
     "displayName": "JassyGlassy",
     "description": "Make your VS Code window transparent on Linux (X11 / Xorg).",
-    "version": "0.1.1",
+    "version": "0.2.0",
     "publisher": "moyhatake",
     "icon": "images/icon.png",
     "repository": {
