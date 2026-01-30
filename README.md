@@ -6,7 +6,7 @@
 
 - **Dynamic Opacity**: Easily increase or decrease window transparency.
 - **Smart Toggle**: Toggle between full opacity and your preferred transparency level with a single shortcut.
-- **Memory**: JassyGlassy remembers your last used opacity level settings, even after you close the window.
+- **Memory**: JassyGlassy remembers your last used opacity level and your **transparency state** (ON/OFF). If you leave transparency off, it stays off the next time you open VS Code.
 - **Configurable**: Customize the step size (default 5%), minimum opacity (default 25%) and whether to enable debug logging (default false).  
 
 ## Preview
@@ -57,5 +57,34 @@ You can adjust these settings in your `settings.json` or via **File > Preference
 
 **Transparency not working:**
 1.  Ensure you are running on X11 (`echo $XDG_SESSION_TYPE` should output `x11`).
-2.  Ensure your desktop environment (XFCE, KDE, Gnome) has a **Compositor** enabled. Transparency requires a compositor.  
-    *   *e.g.*, **XFCE**: Settings **>** Window Manager Tweaks **>** Compositor **>** Enable display compositing.
+2.  Ensure your desktop environment (XFCE, KDE, Gnome) has a **Compositor** enabled. Transparency requires one.  
+    *   *Example for XFCE*: Settings **>** Window Manager Tweaks **>** Compositor **>** Enable display compositing.
+
+## Optional: Glass / Blur Effect
+
+<img src="images/visuals/4.png" alt="Visual 4" style="height: 200px; flex-shrink: 0;">  
+
+If you want a blurred "glass" effect rather than just simple transparency, you can use a compatible compositor like **Picom** or **KWin**. 
+
+1.  **Picom**: Disable your desktop’s default compositor, install picom, and run it (ideally create a startup config to make it your new default compositor).  
+    *   **Arch/Manjaro**: `sudo pacman -S picom && picom -b`
+    *   **Debian/Ubuntu**: `sudo apt install picom && picom -b`
+    *   **Fedora**: `sudo dnf install picom && picom -b`  
+    *Some Fedora spins may already run a compositor (Mutter/KWin).*
+
+    Picom does not create a user config by default. If `~/.config/picom/picom.conf` does not exist, copy the example config from `/etc/xdg/picom.conf`:
+    ```bash
+    mkdir -p ~/.config/picom
+    cp /etc/xdg/picom.conf ~/.config/picom/picom.conf
+    ```
+
+    Then make sure your `picom.conf` includes the following settings:  
+    ```conf
+    backend = "glx";
+    blur-background = true;
+    blur-method = "dual_kawase"; 
+    blur-strength = 3; // Adjust as needed
+    ```
+2.  **KDE Plasma**: Blur is often supported natively by KWin and can be customized in the System Settings **>** Desktop Effects.
+
+Once blur is enabled in your compositor, JassyGlassy's transparency will naturally reveal a beautifully blurred background.

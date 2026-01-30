@@ -105,7 +105,11 @@ export function activate(context: vscode.ExtensionContext) {
 
         if (newOpacity < 0.99) {
             await context.globalState.update('preferredOpacity', newOpacity);
-            log(`Preferred opacity saved: ${Math.round(newOpacity * 100)}%`);
+            await context.globalState.update('isEnabled', true);
+            log(`Preferred opacity saved: ${Math.round(newOpacity * 100)}% (Enabled: true)`);
+        } else {
+            await context.globalState.update('isEnabled', false);
+            log("Enabled: false (Opaque)");
         }
     };
 
@@ -118,11 +122,14 @@ export function activate(context: vscode.ExtensionContext) {
             const preferred = getPreferredOpacity();
             log(`Toggle ON → ${Math.round(preferred * 100)}%`);
             await setOpacity(winId, preferred);
+            await context.globalState.update('isEnabled', true);
         } else {
             log("Toggle OFF → 100%");
             await setOpacity(winId, 1.0);
+            await context.globalState.update('isEnabled', false);
         }
     };
+
 
     // Commands
     context.subscriptions.push(
@@ -133,10 +140,16 @@ export function activate(context: vscode.ExtensionContext) {
 
     // Startup behavior
     setTimeout(async () => {
-        log("Applying startup opacity");
-        const winId = await getActiveWindowId();
-        if (winId) {
-            await setOpacity(winId, getPreferredOpacity());
+        log("Checking startup transparency state");
+        const isEnabled = context.globalState.get<boolean>('isEnabled', true);
+        if (isEnabled) {
+            const winId = await getActiveWindowId();
+            if (winId) {
+                log("Restoring transparency state: ON");
+                await setOpacity(winId, getPreferredOpacity());
+            }
+        } else {
+            log("Skipping transparency restoration: State was OFF");
         }
     }, 1500);
 }
